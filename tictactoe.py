@@ -11,11 +11,11 @@ row=3
 column=3
 circle_radius=80
 space=35
-BG_COLOR=(28,170,156)
-#background_image=pygame.image.load("C:\\Users\\ChefAbi\\Desktop\\291c8a1a7afc5666fc7ae76737a993da.jpg")
+#BG_COLOR=(28,170,156)
+background_image=pygame.image.load("C:\\Users\\ChefAbi\\Desktop\\291c8a1a7afc5666fc7ae76737a993da.jpg")
 window=pygame.display.set_mode((width,height))
 pygame.display.set_caption("Mehemmedin oyunu")
-window.fill(BG_COLOR)
+#window.fill(BG_COLOR)
 board=np.zeros((row,column))
 
 def draw_lines():
@@ -73,9 +73,9 @@ def vertical_winning_line(y,player):
 
     posX=y*200+100
     if player==1:
-        color=red
-    elif player==2:
         color=white
+    elif player==2:
+        color=red
 
     pygame.draw.line(window,color,(posX,35),(posX,height-space),15)
 
@@ -105,7 +105,7 @@ def desc_diagonal_winning_line(player):
     pygame.draw.line(window, color, (space, space), (600 - space, 600 - space), 15)
 
 def play_again():
-    window.fill(BG_COLOR)
+    window.blit(background_image, [0, 0])
     draw_lines()
     player=1
     for x in range(row):
@@ -113,11 +113,15 @@ def play_again():
             board[x][y]=0
 
 
-draw_lines()
+#draw_lines()
 player=1
 gameover=False
-
+window.blit(background_image, [0, 0])
 while True:
+    #window.blit(background_image, [0, 0])
+    #draw_figures()
+    #draw_lines()
+
     for i in pygame.event.get():
         if i.type==pygame.QUIT:
             sys.exit()
@@ -139,14 +143,16 @@ while True:
                         gameover=True
                     player=1
 
-                draw_figures()
+                #draw_figures()
         if i.type==pygame.KEYDOWN:
             if i.key==pygame.K_r:
                 play_again()
                 player=1
                 gameover=False
 
-    #window.blit(background_image, [0, 0])
-    #draw_lines()
     #draw_figures()
+    draw_lines()
+    draw_figures()
+
+
     pygame.display.update()
